@@ -1,0 +1,78 @@
+---
+- hosts: hive
+  gather_facts: no
+  become: true
+  tasks:
+  - name: Begin docker installation
+    raw: sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+  - name: Get repo
+    raw: sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+  - name: Install docker
+    raw: sudo yum install docker-ce
+  - name: Start docker
+    raw: sudo systemctl start docker
+  - name: Enable docker
+    raw: sudo systemctl enable docker
+  - name: Reserve IP 1
+    raw: sudo ip addr add 192.168.1.100 dev enp0s3
+  - name: Reserve IP 2
+    raw: sudo ip addr add 192.168.1.101 dev enp0s3
+  - name: Reserve IP 3
+    raw: sudo ip addr add 192.168.1.102 dev enp0s3
+  - name: Reserve IP 4
+    raw: sudo ip addr add 192.168.1.103 dev enp0s3
+  - name: Reserve IP 5
+    raw: sudo ip addr add 192.168.1.104 dev enp0s3
+  - name: Reserve IP 6
+    raw: sudo ip addr add 192.168.1.105 dev enp0s3
+  - name: Reserve IP 7
+    raw: sudo ip addr add 192.168.1.106 dev enp0s3
+  - name: Reserve IP 8
+    raw: sudo ip addr add 192.168.1.107 dev enp0s3
+  - name: Reserve IP 9
+    raw: sudo ip addr add 192.168.1.108 dev enp0s3
+  - name: Reserve IP 10
+    raw: sudo ip addr add 192.168.1.109 dev enp0s3
+  - name: Pull Docker Image
+    raw: docker pull schulale/cs312hw7_node:1.0
+  - name: Create first docker container
+    raw: docker run -d --init --rm --name node1 -p 192.168.1.100:80:80 -p 192.168.1.100:2222:22 schulale/cs312hw7_node:1.0
+  - name: Create second docker container
+    raw: docker run -d --init --rm --name node2 -p 192.168.1.101:80:80 -p 192.168.1.101:2222:22 schulale/cs312hw7_node:1.0
+  - name: Create third docker container
+    raw: docker run -d --init --rm --name node3 -p 192.168.1.102:80:80 -p 192.168.1.102:2222:22 schulale/cs312hw7_node:1.0
+  - name: Create fourth docker container
+    raw: docker run -d --init --rm --name node4 -p 192.168.1.103:80:80 -p 192.168.1.103:2222:22 schulale/cs312hw7_node:1.0
+  - name: Create fifth docker container
+    raw: docker run -d --init --rm --name node5 -p 192.168.1.104:80:80 -p 192.168.1.104:2222:22 schulale/cs312hw7_node:1.0
+  - name: Create sixth docker container
+    raw: docker run -d --init --rm --name node6 -p 192.168.1.105:80:80 -p 192.168.1.105:2222:22 schulale/cs312hw7_node:1.0
+  - name: Create seventh docker container
+    raw: docker run -d --init --rm --name node7 -p 192.168.1.106:80:80 -p 192.168.1.106:2222:22 schulale/cs312hw7_node:1.0
+  - name: Create eighth docker container
+    raw: docker run -d --init --rm --name node8 -p 192.168.1.107:80:80 -p 192.168.1.107:2222:22 schulale/cs312hw7_node:1.0
+  - name: Create ninth docker container
+    raw: docker run -d --init --rm --name node9 -p 192.168.1.108:80:80 -p 192.168.1.108:2222:22 schulale/cs312hw7_node:1.0
+  - name: Create tenth docker container
+    raw: docker run -d --init --rm --name node10 -p 192.168.1.109:80:80 -p 192.168.1.109:2222:22 schulale/cs312hw7_node:1.0
+  - name: Let the containers catch up
+    wait_for: timeout=15
+    delegate_to: localhost
+
+- hosts: mynodes
+  gather_facts: no
+  remote_user: root
+  become: true
+  tasks:
+  - name: Copy index.html
+    template:
+      src: ansible-index.html
+      dest: /root/index.html
+  - name: Copy server.js
+    template:
+      src: server.js
+      dest: /root/server.js
+  - name: Install forever module
+    raw: npm install -g forever
+  - name: Start server.js
+    raw: forever start server.js
