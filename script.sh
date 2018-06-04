@@ -13,12 +13,21 @@ cp ~/id_rs* ~/.ssh
 sudo yum install -y ansible
 ansible-playbook playbook.yaml -i hosts.ini
 curl 192.168.1.100 >> results
+sleep 1
 curl 192.168.1.101 >> results
+sleep 1
 curl 192.168.1.102 >> results
+sleep 1
 curl 192.168.1.103 >> results
+sleep 1
 curl 192.168.1.104 >> results
+sleep 1
 curl 192.168.1.105 >> results
+sleep 1
 curl 192.168.1.106 >> results
+sleep 1
 curl 192.168.1.107 >> results
+sleep 1
 curl 192.168.1.108 >> results
+sleep 1
 curl 192.168.1.109 >> results
