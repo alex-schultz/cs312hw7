@@ -8,7 +8,7 @@
   - name: Get repo
     raw: sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
   - name: Install docker
-    raw: sudo yum install docker-ce
+    raw: sudo yum install -y docker-ce
   - name: Start docker
     raw: sudo systemctl start docker
   - name: Enable docker
