@@ -2,7 +2,6 @@
 
 curl https://raw.githubusercontent.com/alex-schultz/cs312hw7/master/ansible.cfg > ansible.cfg
 curl https://raw.githubusercontent.com/alex-schultz/cs312hw7/master/ansible-index.html > ansible-index.html
-curl https://raw.githubusercontent.com/alex-schultz/cs312hw7/master/hosts.ini > hosts.ini
 curl https://raw.githubusercontent.com/alex-schultz/cs312hw7/master/id_rsa > id_rsa
 curl https://raw.githubusercontent.com/alex-schultz/cs312hw7/master/id_rsa.pub > id_rsa.pub
 curl https://raw.githubusercontent.com/alex-schultz/cs312hw7/master/playbook.yaml > playbook.yaml
